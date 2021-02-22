@@ -1,0 +1,50 @@
+<!-- 텍스트형 엘리먼트 -->
+<custom-element>
+    <p slot="title">타이틀1</p>
+    <p slot="content">컨텐츠1</p>
+</custom-element>
+
+<!-- 리스트형 엘리먼트 -->
+<custom-element>
+    <p slot="title">타이틀2</p>
+    <ul slot="content">
+        <li>리스트1</li>
+        <li>리스트2</li>
+    </ul>
+</custom-element>
+
+<!-- Style scoped 확인을 위한 엘리먼트 -->
+<p>외부 엘리먼트</p>
+
+<!-- 템플릿 영역 -->
+<template id="popup-item">
+    <style>
+        p {
+            background-color: bisque;
+        }
+    </style>
+    <div>
+        <p><slot name="title">타이틀을 입력하세요</slot></p>
+        <p><slot name="content">컨텐츠를 입력하세요</slot></p>
+    </div>
+</template>
+
+<script lang="js">
+    /**
+     * 1. MDN WebDoc 예제
+     */
+    class CustomElement extends HTMLElement {
+        constructor() {
+            super();
+
+            // popup-item 템플릿 인스턴스
+            let template = document.getElementById('popup-item');
+
+            // shadow Root 생성 및 Shadow DOM 에 popup-item 추가
+            const shadow = this.attachShadow({ mode: 'open' })
+                .appendChild(template.content.cloneNode(true));
+        }
+    }
+
+    customElements.define('custom-element', CustomElement);
+</script>
