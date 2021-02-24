@@ -1,0 +1,24 @@
+<ul class="list">
+    <li>list item 1</li>
+    <li>list item 2</li>
+</ul>
+
+<script>
+
+    /**
+     * HTML 을 Javascript Object 로 변환
+     */
+    const dom = {
+        type: 'ul', props: {'class': 'list'}, children: [
+            {
+                type: 'li', props: {}, children: ['list item 1']
+            },
+            {
+                type: 'li', props: {}, children: ['list item 2']
+            }
+        ]
+    };
+
+
+</script>
+

@@ -1,0 +1,23 @@
+<ul class="list">
+    <li>list item 1</li>
+    <li>list item 2</li>
+</ul>
+
+<script>
+
+    /**
+     * HTML 을 Javascript Object 로 변환하는 Function
+     */
+    function h(type, props, ...children) {
+        return { type, props, children };
+    }
+
+    /**
+     * 변환
+     */
+    h('ul', { 'class': 'list' },
+        h('li', {}, 'list item 1'),
+        h('li', {}, 'list item 2')
+    );
+
+</script>
