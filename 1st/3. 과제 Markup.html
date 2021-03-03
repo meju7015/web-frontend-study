@@ -1,13 +1,28 @@
-<html>
+<!DOCTYPE html>
+<html lang="kr">
 <head>
     <meta charset="utf8">
-    <script src="./3.%20과제.js" type="application/javascript"></script>
+    <script src="./3.%20과제%20class.js" type="application/javascript"></script>
+    <title>과제 Markup page</title>
 </head>
 <body>
-    <lg-modal
-            bgColor="red" >
-        <slot slot="title">타이틀</slot>
-        <slot slot="content">설명</slot>
-    </lg-modal>
+<button onclick="document.querySelector('#modal1').show()">모달1 </button>
+<button onclick="document.querySelector('#modal2').show()">모달2 </button>
+
+<simple-modal
+        id="modal1"
+        bgColor="yellow">
+
+    <slot slot="title">모달1</slot>
+    <slot slot="content">모달1 컨텐츠</slot>
+</simple-modal>
+
+<simple-modal
+    id="modal2"
+    bgColor="white">
+    <slot slot="title">모달2</slot>
+    <slot slot="content">모달2 컨텐츠</slot>
+</simple-modal>
+
 </body>
 </html>
