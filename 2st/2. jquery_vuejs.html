@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="kr">
 <head>
-    <title>프론트엔드 스터디</title>
     <meta charset="utf-8">
+
+    <title>프론트엔드 스터디</title>
 
     <!-- bootstrap 5.0.0 -->
     <link
@@ -22,8 +23,36 @@
 
 </head>
 <body>
-    <!-- 테이블1 -->
-    <p>jQuery 테이블</p>
+<!-- 테이블1 -->
+<p>jQuery 테이블</p>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>순번</th>
+        <th>이름</th>
+        <th>연락처</th>
+        <th>생성일</th>
+    </tr>
+    </thead>
+    <tbody id="listBody">
+    <tr>
+        <td class="index"></td>
+        <td class="name"></td>
+        <td class="phone"></td>
+        <td class="created-at"></td>
+    </tr>
+    <tr>
+        <td class="index"></td>
+        <td class="name"></td>
+        <td class="phone"></td>
+        <td class="created-at"></td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- table 2 -->
+<div id="app">
+    <p>Vue 테이블</p>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -33,46 +62,43 @@
             <th>생성일</th>
         </tr>
         </thead>
-        <tbody id="listBody">
-            <tr>
-                <td class="index"></td>
-                <td class="name"></td>
-                <td class="phone"></td>
-                <td class="created-at"></td>
-            </tr>
-            <tr>
-                <td class="index"></td>
-                <td class="name"></td>
-                <td class="phone"></td>
-                <td class="created-at"></td>
-            </tr>
+        <tbody>
+        <tr v-for="(item, key) of vListItems" :key="key">
+            <td class="index">{{ key }}</td>
+            <td class="name">{{ item.name }}</td>
+            <td class="phone">{{ item.phone }}</td>
+            <td class="created-at">{{ item.createdAt }}</td>
+        </tr>
         </tbody>
     </table>
-
-    <!-- table 2 -->
-    <div id="app">
-        <p>Vue 테이블</p>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>순번</th>
-                <th>이름</th>
-                <th>연락처</th>
-                <th>생성일</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(item, key) of vListItems" :key="key">
-                    <td class="index">{{ key }}</td>
-                    <td class="name">{{ item.name }}</td>
-                    <td class="phone">{{ item.phone }}</td>
-                    <td class="created-at">{{ item.createdAt }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+</div>
 </body>
 <script>
+    /**
+     * 뷰 코드
+     */
+    new Vue({
+        el: '#app',
+        data: {
+            vListItems: [
+                {
+                    name: 'mason',
+                    phone: '010-2396-2036',
+                    createdAt: (new Date())
+                },
+                {
+                    name: 'me',
+                    phone: '010-1234-5676',
+                    createdAt: (new Date())
+                },
+            ]
+        }
+    })
+
+    /**
+     * jQuery 코드
+     */
+
     const listItems = [
         {
             name: 'mason',
@@ -86,19 +112,6 @@
         },
     ]
 
-    /**
-     * 뷰 코드
-     */
-    new Vue({
-        el: '#app',
-        data: {
-            vListItems: listItems
-        }
-    })
-
-    /**
-     * jQuery 코드
-     */
     $(document).ready(function () {
 
         var listBody = $('#listBody tr');
@@ -113,5 +126,3 @@
     })
 </script>
 </html>
-
-

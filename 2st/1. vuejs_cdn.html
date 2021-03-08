@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="utf8">
+
+    <title>vuejs를 점진적으로 사용하기</title>
+
+    <!-- vuejs dist -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+<span>이건 Vuejs 엘리먼트가 아닙니다</span>
+
+<span v-if="isVuejs">
+    Vuejs 가 아니다
+    <!--
+        이 엘리먼트는 무조건 표시되며 v-if는 단순 attribute가 됩니다.
+        isVuejs 라는 변수에 접근조차 할 수 없다.
+    -->
+	</span>
+
+<div id="app">
+    <!--
+        이제부터 vuejs 문법이 컴파일 됩니다.
+        아래 코드는 is_vuejs의 return 값에 의해 보이거나 보이지 않게 될것입니다.
+    -->
+    <button @click="isVuejs = !isVuejs">토글 엘리먼트</button>
+
+    <span v-if="isVuejs">
+        Vuejs 엘리먼트다
+    </span>
+</div>
+
+</body>
+</html>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            isVuejs: false,
+        },
+        method: {
+
+        }
+    });
+</script>
