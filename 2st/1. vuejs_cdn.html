@@ -7,42 +7,134 @@
 
     <!-- vuejs dist -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+        strong {
+            color: #d02f2f;
+        }
+
+        .on-vue {
+            color: #1a35dd;
+        }
+
+        .danger  {
+            color: #d02f2f;
+        }
+
+        .info {
+            color: #1a35dd;
+        }
+
+        .success {
+            color: #15ae15;
+        }
+
+        .vuejs-enter-active, .vuejs-leave-active {
+            transition: opacity .5s;
+        }
+
+        .vuejs-enter, .vuejs-leave-to {
+            opacity: 0;
+        }
+    </style>
 </head>
 <body>
 
+
 <span>이건 Vuejs 엘리먼트가 아닙니다</span>
 
+<!--
+    이 엘리먼트는 무조건 표시되며 v-if는 단순 attribute가 됩니다.
+    isVuejs 라는 변수에 접근조차 할 수 없다.
+-->
 <span v-if="isVuejs">
-    Vuejs 가 아니다
-    <!--
-        이 엘리먼트는 무조건 표시되며 v-if는 단순 attribute가 됩니다.
-        isVuejs 라는 변수에 접근조차 할 수 없다.
-    -->
-	</span>
+    <strong>{{ vuejsString }}</strong> 가 아니다
+</span>
 
+<br><br>
+<hr>
+<br><br>
+
+<!--
+    이제부터 vuejs 문법이 컴파일 됩니다.
+    아래 코드는 is_vuejs의 return 값에 의해 보이거나 보이지 않게 될것입니다.
+-->
 <div id="app">
-    <!--
-        이제부터 vuejs 문법이 컴파일 됩니다.
-        아래 코드는 is_vuejs의 return 값에 의해 보이거나 보이지 않게 될것입니다.
-    -->
+
     <button @click="isVuejs = !isVuejs">토글 엘리먼트</button>
 
+    <!-- if else 문법 -->
     <span v-if="isVuejs">
-        Vuejs 엘리먼트다
+        <strong class="on-vue">{{ vuejsString }}</strong> 엘리먼트다
     </span>
+    <span v-else-if="typeof isVuejs === 'undefined'">
+        else-if 엘리먼트가 표시 될까요 ?
+    </span>
+    <span v-else>
+        else 엘리먼트가 표시 될까요 ?
+    </span>
+
+    <br><br>
+    <hr>
+    <br><br>
+
+    <!-- for 문법 -->
+    <div v-for="(item, key) in items" :key="key">
+        <!-- 트랜지션 컴포넌트 -->
+        <transition name="vuejs" appear>
+            <span v-if="item.visible" :class="item.class">
+                {{ item.text }}
+            </span>
+        </transition>
+        <button v-on:click="toggle(key)">토글</button>
+    </div>
+
+    <br><br>
+    <hr>
+    <br><br>
+
+    <!-- 이벤트 핸들링 -->
+    <button
+            v-on:click="clickCount++"
+            v-on:keyup.left="clickCount--"
+            v-on:keyup.right="clickCount++">
+        {{ clickCount }}
+    </button>
+
 </div>
-
 </body>
-</html>
-
 <script>
     new Vue({
         el: '#app',
         data: {
             isVuejs: false,
+            vuejsString: 'Vuejs',
+            items: [
+                {
+                    class: 'danger',
+                    text: '반복문',
+                    visible: true
+                },
+                {
+                    class: 'info',
+                    text: '테스트',
+                    visible: true
+                },
+                {
+                    class: 'success',
+                    text: '입니다',
+                    visible: true
+                }
+            ],
+            clickCount: 0,
         },
-        method: {
-
+        methods: {
+            toggle (key) {
+                this.items[key].visible = !this.items[key].visible;
+            }
         }
     });
 </script>
+</html>
+
+
