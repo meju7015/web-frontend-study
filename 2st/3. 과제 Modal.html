@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="utf-8">
+
+    <title>프론트엔드 스터디</title>
+
+    <!-- bootstrap 5.0.0 -->
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+            crossorigin="anonymous">
+
+    <!-- jQuery 3.5.1 -->
+    <script
+            src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous"></script>
+
+    <!-- vuejs dist -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<!-- table 2 -->
+<div id="app">
+
+    <ul>
+        <li v-for="(item, key) in userData" :key="key" v-on:click="modalOpen(item)">
+            {{ item.name }} | {{item.phone}}
+        </li>
+    </ul>
+
+    <!-- 모달 영역 -->
+    <div class="modal-wrap" v-if="modalInfo.visible" @click.self="modalInfo.visible = false">
+        <div class="modal-box">
+            <span class="close" @click="modalInfo.visible = false">&times;</span>
+            <div class="modal-title">
+                {{ modalInfo.title }}
+            </div>
+            <div class="modal-body">
+                {{ modalInfo.content }}
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+<style>
+    .modal-wrap {
+        position: fixed;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+
+    .modal-box {
+        background-color: #efefef;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+        border-radius: 15px;
+    }
+
+    .modal-title {
+        font-size: 20px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    /**
+     * 뷰 코드
+     */
+    new Vue({
+        el: '#app',
+        methods: {
+            modalOpen: function (item) {
+                this.modalInfo.title = item.name;
+                this.modalInfo.content = item.phone;
+                this.modalInfo.visible = true;
+            }
+        },
+        data: {
+            userData: [
+                {
+                    name: '정주호',
+                    phone: '010-2396-2036'
+                },
+                {
+                    name: '김경식',
+                    phone: '010-1234-5678'
+                },
+                {
+                    name: '한우불고기',
+                    phone: '02-1234-2222'
+                }
+            ],
+            modalInfo: {
+                visible: false,
+                title: '',
+                content: ''
+            }
+        }
+    })
+</script>
+</html>

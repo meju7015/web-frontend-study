@@ -1,46 +1,14 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-    <meta charset="utf8">
+    <meta charset="utf-8">
 
     <title>vuejs를 점진적으로 사용하기</title>
 
     <!-- vuejs dist -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-    <style>
-        strong {
-            color: #d02f2f;
-        }
-
-        .on-vue {
-            color: #1a35dd;
-        }
-
-        .danger  {
-            color: #d02f2f;
-        }
-
-        .info {
-            color: #1a35dd;
-        }
-
-        .success {
-            color: #15ae15;
-        }
-
-        .vuejs-enter-active, .vuejs-leave-active {
-            transition: opacity .5s;
-        }
-
-        .vuejs-enter, .vuejs-leave-to {
-            opacity: 0;
-        }
-    </style>
 </head>
 <body>
-
-
 <span>이건 Vuejs 엘리먼트가 아닙니다</span>
 
 <!--
@@ -103,6 +71,35 @@
 
 </div>
 </body>
+<style>
+    strong {
+        color: #d02f2f;
+    }
+
+    .on-vue {
+        color: #1a35dd;
+    }
+
+    .danger  {
+        color: #d02f2f;
+    }
+
+    .info {
+        color: #1a35dd;
+    }
+
+    .success {
+        color: #15ae15;
+    }
+
+    .vuejs-enter-active, .vuejs-leave-active {
+        transition: opacity .5s;
+    }
+
+    .vuejs-enter, .vuejs-leave-to {
+        opacity: 0;
+    }
+</style>
 <script>
     new Vue({
         el: '#app',
@@ -129,7 +126,7 @@
             clickCount: 0,
         },
         methods: {
-            toggle (key) {
+            toggle: function (key) {
                 this.items[key].visible = !this.items[key].visible;
             }
         }
