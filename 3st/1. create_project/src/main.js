@@ -1,8 +1,20 @@
 import Vue from 'vue'
-import App from './App.vue'
+import routes from './router';
 
 Vue.config.productionTip = false
 
-new Vue({
-  render: h => h(App),
+const app = new Vue({
+  data: {
+    currentRoute: window.location.pathname
+  },
+  computed: {
+    ViewComponent () {
+      return routes[this.currentRoute] || false;
+    }
+  },
+  render (h) { return h(this.ViewComponent); }
 }).$mount('#app')
+
+window.addEventListener('popstate', () => {
+  app.currentRoute = window.location.pathname;
+})
