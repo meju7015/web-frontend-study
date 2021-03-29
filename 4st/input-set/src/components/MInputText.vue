@@ -5,8 +5,12 @@
       :maxlength="maxLength"
       :minlength="minLength"
       :placeholder="placeholder"
-      @input="$emit('input', $event.target.value)"
+      @input="updateInputText"
     >
+    <slot
+      class="error"
+      v-if="required && !isValidate"
+      name="error"><span>이 필드는 필수 입니다.</span></slot>
   </label>
 </template>
 
@@ -23,6 +27,10 @@ export default {
             || value === 'email';
       }
     },
+    required: {
+      type: Boolean,
+      default: false,
+    },
     maxLength: {
       type: String
     },
@@ -34,7 +42,28 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      isValidate: true
+    }
+  },
+  watch: {
+    '$el.value'(v) {
+      if (v === '') {
+        this.isValidate = false;
+      }
+    }
+  },
+  methods: {
+    updateInputText(event) {
+      this.isValidate = !!event.target.value;
+      this.$emit('input', event.target.value)
+    }
   }
 }
 </script>
+
+<style>
+  label span {
+    color: red;
+  }
+</style>

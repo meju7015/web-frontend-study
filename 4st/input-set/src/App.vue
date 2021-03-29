@@ -29,6 +29,24 @@
           type="email"></m-input-text>
     </div>
 
+    <div class="container">
+      <span>Required 처리된 인풋</span>
+      <m-input-text
+        v-model="model7"
+        required
+        type="text"></m-input-text>
+    </div>
+
+    <div class="container">
+      <span>Required & 슬롯 처리된 인풋</span>
+      <m-input-text
+              v-model="model7"
+              required
+              type="text">
+        <span slot="error">모델 7은 필수값이야!</span>
+      </m-input-text>
+    </div>
+
     <button type="submit">전송!?</button>
 
     <hr class="hr">
@@ -50,12 +68,30 @@
 
     <div class="container">
       <div>라디오 박스</div>
-      <m-radio-group v-model="model6">
-        <m-radio
-          val="boy">남자</m-radio>
-        <m-radio
-          val="girl">여자</m-radio>
-      </m-radio-group>
+      <m-radio
+        id="model6"
+        v-model="model6"
+        val="boy">남자</m-radio>
+      <m-radio
+        id="model6"
+        v-model="model6"
+        val="girl">여자</m-radio>
+    </div>
+
+    <hr class="hr">
+
+    <div class="container">
+      <div>셀렉트 박스</div>
+      <m-select
+        v-model="model8"
+        :options="[{
+          label: '레알마드리드',
+          value: 1,
+        }, {
+          label: '맨체스터 유나이티드',
+          value: 2
+        }]">
+      </m-select>
     </div>
   </form>
 </template>
@@ -64,12 +100,12 @@
 import MInputText from "@/components/MInputText";
 import MCheckbox from "@/components/MCheckbox";
 import MRadio from "@/components/MRadio";
-import MRadioGroup from "@/components/MRadioGroup";
+import MSelect from "./components/MSelect";
 
 export default {
   name: 'App',
   components: {
-    MRadioGroup,
+    MSelect,
     MRadio,
     MCheckbox,
     MInputText
@@ -82,6 +118,8 @@ export default {
       model4: '',
       model5: [],
       model6: '',
+      model7: '',
+      model8: '',
     }
   }
 }
