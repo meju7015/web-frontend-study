@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <title>스터디</title>
+
+    <!-- vuejs dist -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+        #app{text-align:center}
+        .btn-snack{display:inline-block;min-width:100px;margin:20px 10px;padding:10px 20px;background:#4229bc;border:0;border-radius:5px;color:#fff;text-align:center;font-size:20px;line-height:1.25;outline:none}
+        .snack-box{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);min-width:200px;padding:0 100px 0 20px;background:rgba(0,0,0,0.9);border-radius:5px;color:#fff;text-align:left;font-size:20px;line-height:1.25}
+        .snack-box button{position:fixed;top:50%;right:10px;transform:translateY(-50%);background:none;outline:none;border:0;color:#f00;letter-spacing:1px;font-size:12px}
+        .snack-box button:hover{text-decoration:underline}
+
+        .snack-enter-active,.snack-leave-active{transition:.3s}
+        .snack-enter,.snack-leave-to{opacity:0;transform:translateX(-50%) translateY(60px) scale(0.5)}
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+    <button v-for="(item, key) in items" :key="key" v-on:click="modalOpen(item)" class="btn-snack">{{item.msgName}}</button>
+
+    <!--
+  v-for를 사용하여 동시에 렌더링 하고자 하는 항목의 전체 목록이 있는 경우는 어떨까요?
+  이 경우 우리는<transition-group> 컴포넌트를 사용
+  <transition-group name="snack" tag="div">
+    <div v-for="(item, key) in items" :key="key" v-if="item.visible" v-bind:style="zIndexUpdate(key)" class="snack-box">
+      <p>{{ item.text }}</p>
+      <button v-on:click="modalClose(key)">CLOSE</button>
+    </div>
+  </transition-group>
+  -->
+
+    <transition name="snack" v-for="(item, key) in items" :key="key">
+        <div v-if="item.visible" v-bind:style="zIndexUpdate(key)" class="snack-box">
+            <p>{{ item.msg }}</p>
+            <button v-on:click="modalClose(key)">CLOSE</button>
+        </div>
+    </transition>
+</div>
+
+<!--
+v-if
+v-for
+v-on:click
+transition
+methods/data
+-->
+
+</body>
+<script>
+    //vuejs
+    new Vue({
+        el:'#app',
+        methods:{
+            modalOpen: function (item) {
+                if (!item.visible) {
+                    item.visible = true;
+                    setTimeout(() => {
+                        item.visible = false;
+                    }, 2000);
+                }
+                item.zIndex = ++this.zIndexUp;
+            },
+            modalClose:function(key){
+                this.items[key].visible=false;
+            },
+            zIndexUpdate(key) {
+                return{
+                    zIndex: this.items[key].zIndex,
+                }
+            }
+        },
+        data:{
+            zIndexUp:0,
+            items: [
+                {
+                    msgName:'경고메세지1',
+                    msg: '잘못된 접근입니다.',
+                    visible: false,
+                    zIndex:0,
+                },
+                {
+                    msgName:'경고메세지2',
+                    msg: '지금 페이지를 새로고침 해주세요.',
+                    visible: false,
+                    zIndex:0,
+                },
+                {
+                    msgName:'경고메세지3',
+                    msg: '페이지에 오류가 있습니다.',
+                    visible: false,
+                    zIndex:0,
+                }
+            ],
+        }
+    })
+
+</script>
+</html>
