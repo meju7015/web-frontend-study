@@ -1,24 +1,5 @@
-# input-set
+# 4주차
+커스텀 인풋 세트를 만들어주세요. (Input 은 text, password, email 로 묶어 주시고 각각의 컴포넌트로 구현, selectbox와 textarea 포함)
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- input-set/src/components 의컴포넌트를 참고하세요.
+- textarea는 text-input과 똑같으므로 pass! 
