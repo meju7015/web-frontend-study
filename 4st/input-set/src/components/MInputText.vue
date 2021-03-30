@@ -1,16 +1,16 @@
 <template>
   <label>
     <input
-      :type="type"
-      :maxlength="maxLength"
-      :minlength="minLength"
-      :placeholder="placeholder"
-      @input="updateInputText"
+        :type="type"
+        :maxlength="maxLength"
+        :minlength="minLength"
+        :placeholder="placeholder"
+        @input="updateInputText"
     >
     <slot
-      class="error"
-      v-if="required && !isValidate"
-      name="error"><span>이 필드는 필수 입니다.</span></slot>
+        class="error"
+        v-if="required && !isValidate"
+        name="error"><span>이 필드는 필수 입니다.</span></slot>
   </label>
 </template>
 
@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style>
-  label span {
-    color: red;
-  }
+label span {
+  color: red;
+}
 </style>
