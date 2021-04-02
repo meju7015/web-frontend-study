@@ -1,0 +1,18 @@
+.card-enter-active {
+  transition: all .3s ease;
+}
+
+.card-enter, .card-leave-to {
+  transform: translate(10px);
+  opacity: 0;
+}
+
+.modal-enter-active, .modal-leave-active {
+  transition: all .3s ease;
+  opacity: 1;
+}
+
+.modal-enter, .modal-leave-to {
+  transform: translateY(-10px);
+  opacity: 0;
+}
